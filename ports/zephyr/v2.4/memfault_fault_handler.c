@@ -115,6 +115,9 @@ void memfault_platform_reboot(void) {
   memfault_zephyr_z_fatal_error();
 #endif
 
+  /* Notify logging backends to synchronously empty buffers before rebooting */
+  log_panic();
+
   sys_arch_reboot(0);
   CODE_UNREACHABLE;
 }
