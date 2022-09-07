@@ -107,7 +107,9 @@ void memfault_zephyr_z_fatal_error(void) {
 MEMFAULT_WEAK
 MEMFAULT_NORETURN
 void memfault_platform_reboot(void) {
+#if !CONFIG_LOG_BACKEND_RTT
   memfault_platform_halt_if_debugging();
+#endif
 
 #if CONFIG_MEMFAULT_ZEPHYR_FATAL_HANDLER
   memfault_zephyr_z_fatal_error();
